@@ -1,0 +1,3 @@
+import ProductsClient from "@/components/products/ProductsClient"; import SkeletonCard from "@/components/shared/SkeletonCard"; import {Suspense} from "react";
+function Loading(){return <main className="min-h-screen bg-slate-50 px-4 py-10 dark:bg-slate-950"><section className="mx-auto max-w-7xl"><div className="mb-8 rounded-[2rem] bg-slate-950 p-8 md:p-12"><div className="h-8 w-52 animate-pulse rounded bg-slate-800"/><div className="mt-5 h-16 max-w-3xl animate-pulse rounded bg-slate-800"/></div><div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{Array.from({length:8}).map((_,i)=><SkeletonCard key={i}/>)}</div></section></main>}
+export default function ProductsPage(){return <Suspense fallback={<Loading/>}><ProductsClient/></Suspense>}

@@ -1,0 +1,2 @@
+"use client";
+import {useState} from "react"; import DashboardHeader from "./DashboardHeader"; import DashboardSidebar from "./DashboardSidebar"; export default function DashboardShell({children}){const [open,setOpen]=useState(false); return <div className="min-h-screen bg-slate-50 dark:bg-slate-950"><DashboardSidebar isOpen={open} onClose={()=>setOpen(false)}/><div className="lg:pl-72"><DashboardHeader onMenuClick={()=>setOpen(true)}/><main className="px-4 py-6 lg:px-8 lg:py-8">{children}</main></div></div>}

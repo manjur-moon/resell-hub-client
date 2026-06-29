@@ -1,0 +1,4 @@
+"use client";
+import {createContext,useContext,useEffect,useMemo,useState} from "react"; const ThemeContext=createContext(null);
+export function ThemeProvider({children}){const [theme,setTheme]=useState('light'); const [mounted,setMounted]=useState(false); useEffect(()=>{const saved=localStorage.getItem('resellhub-theme'); if(saved==='dark'||saved==='light') setTheme(saved); setMounted(true)},[]); useEffect(()=>{if(!mounted)return; document.documentElement.classList.toggle('dark',theme==='dark'); localStorage.setItem('resellhub-theme',theme)},[theme,mounted]); const toggleTheme=()=>setTheme(t=>t==='dark'?'light':'dark'); const value=useMemo(()=>({theme,setTheme,toggleTheme}),[theme]); return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>}
+export function useTheme(){const c=useContext(ThemeContext); if(!c) throw new Error('useTheme must be used inside ThemeProvider.'); return c;}

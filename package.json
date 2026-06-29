@@ -1,0 +1,30 @@
+{
+  "name": "resellhub-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "axios": "^1.7.9",
+    "@tanstack/react-query": "^5.62.7",
+    "better-auth": "^1.6.8",
+    "react-hot-toast": "^2.5.1",
+    "react-hook-form": "^7.54.2",
+    "lucide-react": "^0.468.0",
+    "framer-motion": "^11.15.0",
+    "recharts": "^2.15.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "^15.1.0"
+  }
+}

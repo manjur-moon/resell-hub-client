@@ -1,0 +1,4 @@
+"use client";
+import {getCurrentUserApi,logoutUser} from "@/lib/authApi"; import {createContext,useCallback,useContext,useEffect,useMemo,useState} from "react"; const AuthContext=createContext(null);
+export function AuthProvider({children}){const [user,setUser]=useState(null),[loading,setLoading]=useState(true); const refreshUser=useCallback(async()=>{try{setLoading(true); const data=await getCurrentUserApi(); setUser(data?.user||null)}catch{setUser(null)}finally{setLoading(false)}},[]); const logout=useCallback(async()=>{await logoutUser(); setUser(null)},[]); useEffect(()=>{refreshUser()},[refreshUser]); const value=useMemo(()=>({user,loading,setUser,refreshUser,logout}),[user,loading,refreshUser,logout]); return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>}
+export function useAuth(){const c=useContext(AuthContext); if(!c) throw new Error('useAuth must be used inside AuthProvider.'); return c;}
