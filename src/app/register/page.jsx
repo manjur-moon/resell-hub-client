@@ -1,1 +1,2 @@
-import Link from "next/link"; export default function RegisterPage(){return <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 dark:bg-slate-950"><div className="max-w-md rounded-3xl bg-white p-8 text-center shadow-sm dark:bg-slate-900"><p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-orange-500">Register</p><h1 className="text-3xl font-black text-slate-950 dark:text-white">Registration UI coming soon</h1><p className="mt-4 text-slate-600 dark:text-slate-300">Better Auth foundation is ready; full UI comes later.</p><Link href="/" className="btn-primary mt-6">Back Home</Link></div></main>}
+import RegisterClient from "@/components/auth/RegisterClient";
+export default function RegisterPage() { return <RegisterClient />; }
