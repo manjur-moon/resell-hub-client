@@ -1,5 +1,11 @@
 # ReSell Hub Client
 
+##Live url:
+https://resell-hub-client-gamma.vercel.app/
+
+https://resell-hub-server-rewt.onrender.com
+
+
 ## Purpose
 Frontend for ReSell Hub, a second-hand marketplace platform.
 
