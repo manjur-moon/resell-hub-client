@@ -1,3 +1,46 @@
-import ProductsClient from "@/components/products/ProductsClient"; import SkeletonCard from "@/components/shared/SkeletonCard"; import {Suspense} from "react";
-function Loading(){return <main className="min-h-screen bg-slate-50 px-4 py-10 dark:bg-slate-950"><section className="mx-auto max-w-7xl"><div className="mb-8 rounded-[2rem] bg-slate-950 p-8 md:p-12"><div className="h-8 w-52 animate-pulse rounded bg-slate-800"/><div className="mt-5 h-16 max-w-3xl animate-pulse rounded bg-slate-800"/></div><div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{Array.from({length:8}).map((_,i)=><SkeletonCard key={i}/>)}</div></section></main>}
-export default function ProductsPage(){return <Suspense fallback={<Loading/>}><ProductsClient/></Suspense>}
+import ProductsClient from "@/components/products/ProductsClient";
+import SkeletonCard from "@/components/shared/SkeletonCard";
+import { Suspense } from "react";
+
+function Loading() {
+  return (
+    <main className="min-h-screen bg-[#f4f1eb] pb-16 dark:bg-[#0f0c0a]">
+      <section className="bg-[#0f0c0a] px-4 pb-24 pt-12 sm:px-6 sm:pb-28 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="h-6 w-48 animate-pulse rounded-full bg-white/10" />
+          <div className="mt-6 h-16 max-w-3xl animate-pulse rounded-2xl bg-white/10" />
+          <div className="mt-5 h-6 max-w-2xl animate-pulse rounded bg-white/[0.07]" />
+        </div>
+      </section>
+
+      <section className="px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto -mt-14 max-w-7xl rounded-[26px] border border-[#d9cec3] bg-[#fbf8f4] p-6 shadow-[0_24px_70px_rgba(36,24,17,0.14)] dark:border-[#3b2f27] dark:bg-[#17120f]">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div key={index} className="h-11 animate-pulse rounded-xl bg-[#e7ded6] dark:bg-[#2b211c]" />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 pt-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="h-9 w-52 animate-pulse rounded bg-[#ded4ca] dark:bg-[#2b211c]" />
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <ProductsClient />
+    </Suspense>
+  );
+}

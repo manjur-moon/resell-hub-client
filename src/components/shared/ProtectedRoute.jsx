@@ -1,3 +1,38 @@
 "use client";
-import {useAuth} from "@/providers/AuthProvider"; import {usePathname,useRouter} from "next/navigation"; import {useEffect} from "react";
-export default function ProtectedRoute({children}){const {user,loading}=useAuth(); const pathname=usePathname(); const router=useRouter(); useEffect(()=>{if(!loading&&!user) router.push(`/login?redirect=${encodeURIComponent(pathname)}`)},[loading,user,router,pathname]); if(loading) return <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950"><div className="rounded-3xl bg-white px-8 py-6 text-center shadow-sm dark:bg-slate-900"><div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-orange-500"/><p className="font-semibold text-slate-700 dark:text-slate-200">Checking session...</p></div></div>; if(!user) return null; return children;}
+
+import { useAuth } from "@/providers/AuthProvider";
+import { ShieldCheck } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+export default function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
+    }
+  }, [loading, user, router, pathname]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#f4f1eb]/70 px-4 dark:bg-[#0f0c0a]">
+        <div className="surface-card w-full max-w-sm p-7 text-center">
+          <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-lg bg-orange-50 text-orange-600 dark:bg-orange-500/10 dark:text-orange-400">
+            <ShieldCheck size={22} />
+          </div>
+          <div className="mx-auto mt-5 h-8 w-8 animate-spin rounded-full border-2 border-[#ded5cb] border-t-orange-500 dark:border-[#57483f] dark:border-t-orange-400" />
+          <p className="mt-4 text-sm font-medium text-[#584940] dark:text-[#e2d7ce]">
+            Checking your session...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) return null;
+
+  return children;
+}

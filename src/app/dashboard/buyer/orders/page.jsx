@@ -1,5 +1,82 @@
 "use client";
+
 import RoleRoute from "@/components/shared/RoleRoute";
 import { getMyOrdersApi } from "@/lib/ordersApi";
 import { useQuery } from "@tanstack/react-query";
-export default function BuyerOrdersPage() { const { data, isLoading } = useQuery({ queryKey: ["my-orders"], queryFn: getMyOrdersApi }); const orders = data?.orders || []; return <RoleRoute allowedRoles={["buyer"]}><div className="space-y-6"><div><p className="text-sm font-bold uppercase tracking-[0.25em] text-orange-500">My Orders</p><h1 className="mt-2 text-3xl font-black text-slate-950 dark:text-white">Your purchase history</h1></div><div className="dashboard-card overflow-x-auto">{isLoading ? <p className="font-semibold text-slate-500">Loading orders...</p> : orders.length === 0 ? <p className="font-semibold text-slate-500">No orders found.</p> : <table className="w-full min-w-[850px] text-left"><thead><tr className="border-b border-slate-200 text-sm text-slate-500 dark:border-slate-800"><th className="py-3">Product</th><th className="py-3">Seller</th><th className="py-3">Amount</th><th className="py-3">Payment</th><th className="py-3">Order</th></tr></thead><tbody>{orders.map(order => <tr key={order._id} className="border-b border-slate-100 dark:border-slate-800"><td className="py-4"><div className="flex items-center gap-3"><img src={order.productImage} alt={order.productTitle} className="h-14 w-14 rounded-2xl object-cover"/><p className="font-bold">{order.productTitle}</p></div></td><td className="py-4">{order.sellerInfo?.name}</td><td className="py-4 font-bold">৳{Number(order.totalAmount).toLocaleString()}</td><td className="py-4 capitalize">{order.paymentStatus}</td><td className="py-4 capitalize">{order.orderStatus}</td></tr>)}</tbody></table>}</div></div></RoleRoute>; }
+
+function StatusBadge({ status }) {
+  const style =
+    status === "delivered"
+      ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300"
+      : status === "cancelled" || status === "rejected"
+        ? "bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-300"
+        : "bg-orange-50 text-orange-700 dark:bg-orange-500/10 dark:text-orange-300";
+
+  return <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold capitalize ${style}`}>{status}</span>;
+}
+
+export default function BuyerOrdersPage() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["my-orders"],
+    queryFn: getMyOrdersApi,
+  });
+
+  const orders = data?.orders || [];
+
+  return (
+    <RoleRoute allowedRoles={["buyer"]}>
+      <div className="space-y-6">
+        <section className="dashboard-hero">
+          <p className="eyebrow">My orders</p>
+          <h1 className="dashboard-page-heading mt-1">Your purchase history</h1>
+          <p className="dashboard-page-copy">Review products you purchased and follow their payment and order status.</p>
+        </section>
+
+        <section className="dashboard-card overflow-hidden p-0">
+          <div className="border-b border-[#ded5cb] bg-[#f4f1eb]/70 px-4 py-3 dark:border-[#3a2f28] dark:bg-[#0f0c0a]/50">
+            <p className="text-sm font-medium text-[#6f6259] dark:text-[#c9bbb1]">Total orders: {orders.length}</p>
+          </div>
+          <div className="table-scroll">
+            {isLoading ? (
+              <p className="p-6 text-sm font-medium text-[#807168] dark:text-[#9a8980]">Loading orders...</p>
+            ) : orders.length === 0 ? (
+              <p className="p-6 text-sm font-medium text-[#807168] dark:text-[#9a8980]">No orders found.</p>
+            ) : (
+              <table className="dashboard-table min-w-[850px]">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Seller</th>
+                    <th>Amount</th>
+                    <th>Payment</th>
+                    <th>Order</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map(order => (
+                    <tr key={order._id}>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={order.productImage}
+                            alt={order.productTitle}
+                            className="h-12 w-12 rounded-md object-cover ring-1 ring-[#ded5cb] dark:ring-[#57483f]"
+                          />
+                          <p className="font-semibold text-[#211a16] dark:text-white">{order.productTitle}</p>
+                        </div>
+                      </td>
+                      <td>{order.sellerInfo?.name}</td>
+                      <td className="font-semibold text-[#211a16] dark:text-white">৳{Number(order.totalAmount).toLocaleString()}</td>
+                      <td className="capitalize">{order.paymentStatus}</td>
+                      <td><StatusBadge status={order.orderStatus} /></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </section>
+      </div>
+    </RoleRoute>
+  );
+}
