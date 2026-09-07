@@ -57,20 +57,26 @@ export default function AboutPage() {
   return (
     <PublicLayout>
       <main className="min-h-screen bg-[#f4f1eb]/70 dark:bg-[#0f0c0a]">
-        <section className="border-b border-[#2a1d16] bg-[#15110f] px-4 pb-14 pt-10 text-white sm:px-6 sm:pb-16 lg:px-8 lg:pb-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
+        <section className="px-4 pb-10 pt-8 sm:px-6 sm:pb-12 sm:pt-10 lg:px-8 lg:pb-14">
+          <div className="about-intro mx-auto max-w-7xl">
+            <div className="about-intro-grid" aria-hidden="true" />
+            <div className="about-intro-orb about-intro-orb-one" aria-hidden="true" />
+            <div className="about-intro-orb about-intro-orb-two" aria-hidden="true" />
+
+            <div className="relative z-10 grid gap-10 px-6 py-9 sm:px-8 sm:py-11 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:px-11 lg:py-12">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-orange-300">
+                <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50/85 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-orange-700 shadow-sm backdrop-blur dark:border-orange-500/20 dark:bg-orange-500/10 dark:text-orange-300">
                   <PackageCheck size={15} />
                   About ReSell Hub
                 </div>
 
-                <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-white sm:text-5xl lg:text-6xl">
-                  Better resale starts with better context.
+                <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.05em] text-[#211a16] dark:text-white sm:text-5xl lg:text-6xl">
+                  Resale works better when
+                  <span className="block text-orange-600 dark:text-orange-400">every role has context.</span>
                 </h1>
-                <p className="mt-6 max-w-2xl text-base leading-8 text-white/62 sm:text-lg">
-                  ReSell Hub is a role-based second-hand marketplace designed to make buying and selling feel clearer, safer and more intentional—from discovery to checkout and post-purchase management.
+
+                <p className="mt-6 max-w-2xl text-base leading-8 text-[#6f6259] dark:text-[#c9bbb1] sm:text-lg">
+                  ReSell Hub brings buyers, sellers and admins into one focused marketplace where product condition, seller identity and transaction context stay visible from discovery to checkout.
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
@@ -80,40 +86,69 @@ export default function AboutPage() {
                   </Link>
                   <Link
                     href="/register"
-                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-4 text-sm font-semibold text-white transition hover:border-orange-400/35 hover:bg-white/10"
+                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#d8cbc0] bg-[#fffaf6]/80 px-4 text-sm font-semibold text-[#2e241f] shadow-sm backdrop-blur transition hover:border-orange-300 hover:bg-white dark:border-white/10 dark:bg-white/[0.045] dark:text-white dark:hover:border-orange-400/30 dark:hover:bg-white/[0.08]"
                   >
                     Start selling
                   </Link>
                 </div>
+
+                <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-[#6f6259] dark:text-[#b9aaa0]">
+                  <span className="inline-flex items-center gap-2">
+                    <BadgeCheck size={16} className="text-orange-500" />
+                    Verified seller signals
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <ShieldCheck size={16} className="text-orange-500" />
+                    Role-based access
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <Leaf size={16} className="text-orange-500" />
+                    Better product reuse
+                  </span>
+                </div>
               </div>
 
-              <div className="relative overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.055] p-6 backdrop-blur sm:p-7">
-                <div className="absolute -right-14 -top-16 h-44 w-44 rounded-full bg-orange-500/10 blur-3xl" />
-                <div className="relative">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/42">
-                    Marketplace principle
-                  </p>
-                  <p className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">
-                    Buying second-hand should not feel like guessing.
-                  </p>
-                  <p className="mt-4 text-sm leading-7 text-white/58">
-                    Condition, seller identity, location, pricing and order context should be visible where decisions happen—not hidden behind unnecessary steps.
-                  </p>
+              <div className="about-role-map" aria-label="Buyer, seller and admin marketplace roles">
+                <div className="about-role-ring about-role-ring-one" aria-hidden="true" />
+                <div className="about-role-ring about-role-ring-two" aria-hidden="true" />
 
-                  <div className="mt-7 grid grid-cols-3 divide-x divide-white/10 border-y border-white/10 py-5">
-                    {[
-                      ["3", "User roles"],
-                      ["1", "Unified flow"],
-                      ["24/7", "Marketplace access"],
-                    ].map(([value, label]) => (
-                      <div key={label} className="px-3 first:pl-0 sm:px-5">
-                        <p className="text-2xl font-semibold tracking-tight text-orange-300">
-                          {value}
-                        </p>
-                        <p className="mt-1 text-xs text-white/42">{label}</p>
-                      </div>
-                    ))}
+                <div className="about-role-hub">
+                  <div className="about-role-hub-glow" />
+                  <PackageCheck size={28} />
+                  <span>ReSell Hub</span>
+                </div>
+
+                <div className="about-role-node about-role-buyer">
+                  <div className="about-role-icon"><ShoppingBag size={17} /></div>
+                  <div>
+                    <strong>Buyer</strong>
+                    <small>Discover · Wishlist · Purchase</small>
                   </div>
+                </div>
+
+                <div className="about-role-node about-role-seller">
+                  <div className="about-role-icon"><Store size={17} /></div>
+                  <div>
+                    <strong>Seller</strong>
+                    <small>List · Manage · Fulfil</small>
+                  </div>
+                </div>
+
+                <div className="about-role-node about-role-admin">
+                  <div className="about-role-icon"><ShieldCheck size={17} /></div>
+                  <div>
+                    <strong>Admin</strong>
+                    <small>Verify · Moderate · Protect</small>
+                  </div>
+                </div>
+
+                <div className="about-role-note about-role-note-one">
+                  <BadgeCheck size={14} />
+                  Verified context
+                </div>
+                <div className="about-role-note about-role-note-two">
+                  <Leaf size={14} />
+                  Longer product life
                 </div>
               </div>
             </div>
