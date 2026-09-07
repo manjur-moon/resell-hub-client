@@ -89,6 +89,21 @@ const categoryVisuals = {
       "https://images.unsplash.com/photo-1586208958839-06c17cacdf08?auto=format&fit=crop&w=900&q=80",
     alt: "Home appliance setup",
   },
+  Books: {
+    image:
+      "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=900&q=80",
+    alt: "Books arranged on library shelves",
+  },
+  Gaming: {
+    image:
+      "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80",
+    alt: "Gaming setup with screens and gaming equipment",
+  },
+  Others: {
+    image:
+      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=900&q=80",
+    alt: "Assorted everyday lifestyle items",
+  },
 };
 
 const getCategoryVisual = (category) =>

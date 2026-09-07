@@ -4,7 +4,16 @@ import PublicLayout from "@/components/layout/PublicLayout";
 import SkeletonCard from "@/components/shared/SkeletonCard";
 import { getProductCategoriesApi, getProductsApi } from "@/lib/productsApi";
 import { useQuery } from "@tanstack/react-query";
-import { BadgeCheck, PackageSearch, ShoppingBag, Sparkles } from "lucide-react";
+import {
+  BadgeCheck,
+  MapPin,
+  PackageSearch,
+  Search,
+  ShoppingBag,
+  SlidersHorizontal,
+  Sparkles,
+  WalletCards,
+} from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import Pagination from "./Pagination";
@@ -70,62 +79,91 @@ export default function ProductsClient() {
   return (
     <PublicLayout>
       <main className="min-h-screen bg-[#f4f1eb] pb-16 dark:bg-[#0f0c0a]">
-        <section className="relative overflow-hidden bg-[#0f0c0a] px-4 pb-24 pt-10 text-white sm:px-6 sm:pb-28 sm:pt-12 lg:px-8">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(249,115,22,0.16),transparent_33%),radial-gradient(circle_at_10%_90%,rgba(255,255,255,0.055),transparent_28%)]" />
-          <div className="pointer-events-none absolute -right-16 top-12 h-72 w-72 rounded-full border border-white/[0.045]" />
-          <div className="pointer-events-none absolute -right-5 top-24 h-52 w-52 rounded-full border border-orange-500/10" />
+        <section className="px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
+          <div className="products-intro mx-auto max-w-7xl">
+            <div className="products-intro-grid" aria-hidden="true" />
+            <div className="products-intro-orb products-intro-orb-one" aria-hidden="true" />
+            <div className="products-intro-orb products-intro-orb-two" aria-hidden="true" />
 
-          <div className="relative mx-auto max-w-7xl">
-            <div className="grid gap-10 lg:grid-cols-[1fr_0.42fr] lg:items-end">
+            <div className="relative z-10 grid gap-10 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10 lg:py-12">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/20 bg-orange-500/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-orange-300">
-                  <Sparkles size={13} />
+                <div className="inline-flex items-center gap-2 rounded-full border border-orange-200/80 bg-orange-50/90 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-orange-700 shadow-sm dark:border-orange-500/20 dark:bg-orange-500/10 dark:text-orange-300">
+                  <Sparkles size={14} />
                   ReSell Hub marketplace
                 </div>
 
-                <h1 className="mt-6 max-w-4xl text-4xl font-semibold leading-[1.04] tracking-[-0.045em] text-white sm:text-5xl lg:text-[3.8rem]">
-                  Find quality pre-owned products without the clutter.
+                <h1 className="mt-5 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-[#211a16] sm:text-5xl lg:text-[3.55rem] lg:leading-[1.02] dark:text-white">
+                  Search smarter.
+                  <span className="block text-orange-600 dark:text-orange-400">
+                    Find better second-hand value.
+                  </span>
                 </h1>
 
-                <p className="mt-5 max-w-2xl text-sm leading-7 text-[#c9bbb1] sm:text-base">
-                  Search trusted listings, compare prices and narrow products by
-                  category, condition, location and budget across Bangladesh.
+                <p className="mt-5 max-w-2xl text-[15px] leading-7 text-[#6f6259] sm:text-base dark:text-[#c9bbb1]">
+                  Search trusted listings and narrow results by category, condition,
+                  location and budget without digging through marketplace clutter.
                 </p>
 
-                <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/65">
-                  <span className="inline-flex items-center gap-2">
-                    <BadgeCheck size={16} className="text-orange-400" />
+                <div className="mt-7 flex flex-wrap items-center gap-3">
+                  <span className="inline-flex items-center gap-2 rounded-xl border border-[#ded5cb] bg-white/65 px-4 py-2.5 text-sm font-semibold text-[#584940] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.05] dark:text-[#e2d7ce]">
+                    <BadgeCheck size={16} className="text-orange-500" />
                     Verified sellers
                   </span>
-                  <span className="inline-flex items-center gap-2">
-                    <ShoppingBag size={16} className="text-orange-400" />
-                    Approved listings
+                  <span className="inline-flex items-center gap-2 rounded-xl border border-[#ded5cb] bg-white/65 px-4 py-2.5 text-sm font-semibold text-[#584940] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.05] dark:text-[#e2d7ce]">
+                    <ShoppingBag size={16} className="text-orange-500" />
+                    {total} approved listings
                   </span>
                 </div>
               </div>
 
-              <div className="rounded-[24px] border border-white/10 bg-white/[0.055] p-5 backdrop-blur-md lg:justify-self-end lg:min-w-64">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#a89589]">
-                  Available products
-                </p>
-                <div className="mt-3 flex items-end justify-between gap-4">
-                  <span className="text-5xl font-semibold tracking-[-0.05em] text-white">
-                    {total}
-                  </span>
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500 text-white shadow-[0_10px_24px_rgba(249,115,22,0.25)]">
-                    <ShoppingBag size={20} />
+              <div className="products-radar" aria-label="Marketplace search signals">
+                <div className="products-radar-ring products-radar-ring-one" aria-hidden="true" />
+                <div className="products-radar-ring products-radar-ring-two" aria-hidden="true" />
+                <div className="products-radar-sweep" aria-hidden="true" />
+
+                <div className="products-radar-hub" aria-hidden="true">
+                  <div className="products-radar-hub-glow" />
+                  <Search size={30} />
+                </div>
+
+                <div className="product-signal-card product-signal-one">
+                  <span className="product-signal-icon"><ShoppingBag size={17} /></span>
+                  <span>
+                    <strong>{total} listings</strong>
+                    <small>Available now</small>
                   </span>
                 </div>
-                <p className="mt-3 text-xs leading-5 text-white/45">
-                  Marketplace inventory matching your current search.
-                </p>
+
+                <div className="product-signal-card product-signal-two">
+                  <span className="product-signal-icon"><MapPin size={17} /></span>
+                  <span>
+                    <strong>Location</strong>
+                    <small>Search by area</small>
+                  </span>
+                </div>
+
+                <div className="product-signal-card product-signal-three">
+                  <span className="product-signal-icon"><WalletCards size={17} /></span>
+                  <span>
+                    <strong>Budget</strong>
+                    <small>Set your range</small>
+                  </span>
+                </div>
+
+                <div className="product-signal-card product-signal-four">
+                  <span className="product-signal-icon"><SlidersHorizontal size={17} /></span>
+                  <span>
+                    <strong>Refine</strong>
+                    <small>Condition & sort</small>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         <section className="relative z-10 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto -mt-14 max-w-7xl sm:-mt-16">
+          <div className="mx-auto mt-6 max-w-7xl sm:mt-7">
             <ProductFilters
               initialFilters={query}
               categories={categoryData?.categories || []}

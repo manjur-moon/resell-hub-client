@@ -3,7 +3,15 @@
 import PublicLayout from "@/components/layout/PublicLayout";
 import { getProductCategoriesApi } from "@/lib/productsApi";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, Grid3X3 } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Gamepad2,
+  Grid3X3,
+  Laptop,
+  Shirt,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
 
 const categoryVisuals = {
@@ -43,6 +51,24 @@ const categoryVisuals = {
     alt: "Home appliance setup",
     description: "Useful appliances for kitchen, home and daily living.",
   },
+  Books: {
+    image:
+      "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1200&q=80",
+    alt: "Books arranged on library shelves",
+    description: "Books, novels, study materials and reading essentials.",
+  },
+  Gaming: {
+    image:
+      "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
+    alt: "Gaming setup with screens and gaming equipment",
+    description: "Gaming consoles, accessories and entertainment gear.",
+  },
+  Others: {
+    image:
+      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1200&q=80",
+    alt: "Assorted everyday lifestyle items",
+    description: "Useful everyday items and unique resale finds from across the marketplace.",
+  },
 };
 
 const getCategoryVisual = (category) =>
@@ -65,24 +91,91 @@ export default function CategoriesPage() {
     <PublicLayout>
       <main className="min-h-screen bg-[#f4f1eb]/70 px-4 py-8 dark:bg-[#0f0c0a] sm:py-10">
         <section className="mx-auto max-w-7xl">
-          <div className="overflow-hidden rounded-[28px] border border-[#3a2f28] bg-[#17120f] text-white shadow-[0_18px_50px_rgba(35,24,18,0.14)]">
-            <div className="h-1 bg-orange-500" />
-            <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-end lg:p-10">
+          <div className="category-intro">
+            <div className="category-intro-grid" aria-hidden="true" />
+            <div className="category-intro-orb category-intro-orb-one" aria-hidden="true" />
+            <div className="category-intro-orb category-intro-orb-two" aria-hidden="true" />
+
+            <div className="relative z-10 grid gap-10 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10 lg:py-12">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-orange-400">
-                  Browse by category
-                </p>
-                <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
-                  Explore the marketplace by what you need.
+                <div className="inline-flex items-center gap-2 rounded-full border border-orange-200/80 bg-orange-50/90 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-orange-700 shadow-sm dark:border-orange-500/20 dark:bg-orange-500/10 dark:text-orange-300">
+                  <Sparkles size={14} />
+                  Discover by category
+                </div>
+
+                <h1 className="mt-5 max-w-3xl text-4xl font-semibold tracking-[-0.045em] text-[#211a16] sm:text-5xl lg:text-[3.55rem] lg:leading-[1.02] dark:text-white">
+                  Find the right collection
+                  <span className="block text-orange-600 dark:text-orange-400">without the endless scroll.</span>
                 </h1>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-[#c9bbb1]">
-                  Jump directly into electronics, furniture, vehicles, fashion,
-                  mobile phones and other pre-owned product collections.
+
+                <p className="mt-5 max-w-2xl text-[15px] leading-7 text-[#6f6259] sm:text-base dark:text-[#c9bbb1]">
+                  Move straight into the products you care about. Every collection keeps relevant resale listings grouped and easier to explore.
                 </p>
+
+                <div className="mt-7 flex flex-wrap items-center gap-3">
+                  <Link href="/products" className="btn-primary">
+                    Browse all listings
+                    <ArrowRight size={16} />
+                  </Link>
+                  <div className="inline-flex items-center gap-2 rounded-xl border border-[#ded5cb] bg-white/65 px-4 py-2.5 text-sm font-semibold text-[#584940] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.05] dark:text-[#e2d7ce]">
+                    <Grid3X3 size={16} className="text-orange-500" />
+                    {isLoading ? "Loading collections" : `${categories.length} curated collections`}
+                  </div>
+                </div>
               </div>
 
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-orange-600 dark:bg-orange-500/10 dark:text-orange-400">
-                <Grid3X3 size={26} />
+              <div className="category-orbit" aria-label="Popular category shortcuts">
+                <div className="category-orbit-ring category-orbit-ring-one" aria-hidden="true" />
+                <div className="category-orbit-ring category-orbit-ring-two" aria-hidden="true" />
+
+                <div className="category-orbit-hub" aria-hidden="true">
+                  <div className="category-orbit-hub-glow" />
+                  <Grid3X3 size={30} />
+                </div>
+
+                <Link
+                  href="/products?category=Electronics"
+                  className="category-float-card category-float-one"
+                >
+                  <span className="category-float-icon"><Laptop size={18} /></span>
+                  <span>
+                    <strong>Electronics</strong>
+                    <small>Tech & devices</small>
+                  </span>
+                </Link>
+
+                <Link
+                  href="/products?category=Gaming"
+                  className="category-float-card category-float-two"
+                >
+                  <span className="category-float-icon"><Gamepad2 size={18} /></span>
+                  <span>
+                    <strong>Gaming</strong>
+                    <small>Play & gear</small>
+                  </span>
+                </Link>
+
+                <Link
+                  href="/products?category=Fashion"
+                  className="category-float-card category-float-three"
+                >
+                  <span className="category-float-icon"><Shirt size={18} /></span>
+                  <span>
+                    <strong>Fashion</strong>
+                    <small>Wear it again</small>
+                  </span>
+                </Link>
+
+                <Link
+                  href="/products?category=Books"
+                  className="category-float-card category-float-four"
+                >
+                  <span className="category-float-icon"><BookOpen size={18} /></span>
+                  <span>
+                    <strong>Books</strong>
+                    <small>Read & reuse</small>
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
@@ -125,38 +218,35 @@ export default function CategoriesPage() {
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.16),transparent_45%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.13),transparent_40%)]" />
 
                     <div className="absolute inset-y-0 right-0 w-[52%] overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[#fbf8f4]/95 dark:to-[#130e0c]/92" />
+                      <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[#fbf8f4]/55 dark:to-[#130e0c]/58" />
                       <img
                         src={visual.image}
                         alt={visual.alt}
                         loading="lazy"
-                        className="absolute bottom-0 right-0 h-full w-full object-cover opacity-65 transition duration-500 group-hover:scale-105 group-hover:opacity-75 dark:opacity-35 dark:group-hover:opacity-45"
+                        className="absolute bottom-0 right-0 h-full w-full object-cover opacity-95 saturate-[1.08] contrast-[1.06] transition duration-500 group-hover:scale-105 group-hover:opacity-100 dark:opacity-82 dark:saturate-[1.06] dark:contrast-[1.08] dark:brightness-[0.94] dark:group-hover:opacity-95"
                       />
                     </div>
 
-                    <div className="relative flex h-full flex-col justify-between">
-                      <div className="flex items-start justify-between gap-4">
-                        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9e877a] dark:text-[#a58e82]">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <ArrowRight
-                          size={18}
-                          className="text-[#9a8980] transition duration-300 group-hover:translate-x-1 group-hover:text-orange-500 dark:text-white/45 dark:group-hover:text-orange-400"
-                        />
-                      </div>
+                    <ArrowRight
+                      size={18}
+                      className="absolute right-6 top-6 z-10 text-[#9a8980] transition duration-300 group-hover:translate-x-1 group-hover:text-orange-500 dark:text-white/45 dark:group-hover:text-orange-400"
+                    />
 
-                      <div className="max-w-[62%]">
-                        <h3 className="text-[1.6rem] font-semibold tracking-[-0.03em] text-[#211a16] dark:text-white">
-                          {category}
-                        </h3>
-                        <p className="mt-3 text-sm leading-6 text-[#6f6259] dark:text-white/62">
-                          {visual.description}
-                        </p>
-                        <p className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-orange-600 dark:text-orange-400">
-                          Browse items
-                          <ArrowRight size={14} className="transition group-hover:translate-x-1" />
-                        </p>
-                      </div>
+                    <div className="relative z-10 flex min-h-[197px] w-[44%] flex-col items-start justify-center text-left">
+                      <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9e877a] dark:text-[#a58e82]">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <h3 className="mt-8 text-[1.6rem] font-semibold tracking-[-0.03em] text-[#211a16] dark:text-white">
+                        {category}
+                      </h3>
+                      <p className="mt-3 text-sm leading-6 text-[#6f6259] dark:text-white/62">
+                        {visual.description}
+                      </p>
+                      <p className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-orange-600 dark:text-orange-400">
+                        Browse items
+                        <ArrowRight size={14} className="transition group-hover:translate-x-1" />
+                      </p>
                     </div>
                   </Link>
                 );
