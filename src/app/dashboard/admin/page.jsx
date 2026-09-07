@@ -34,10 +34,10 @@ export default function AdminDashboardPage() {
               Review marketplace growth, moderation, orders, users and revenue from one focused operating workspace.
             </p>
           </div>
-          <div className="mt-6 flex flex-wrap gap-2 text-xs font-medium text-white/55">
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Marketplace oversight</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Moderation controls</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Revenue visibility</span>
+          <div className="dashboard-hero-tags">
+            <span className="dashboard-hero-tag">Marketplace oversight</span>
+            <span className="dashboard-hero-tag">Moderation controls</span>
+            <span className="dashboard-hero-tag">Revenue visibility</span>
           </div>
         </section>
 

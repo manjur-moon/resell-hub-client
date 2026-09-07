@@ -82,13 +82,42 @@ select:focus-visible {
 
 .dashboard-hero {
   @apply relative overflow-hidden rounded-[28px] border p-6 sm:p-7 lg:p-8;
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(218, 202, 189, 0.92);
   background:
-    radial-gradient(circle at 90% 10%, rgba(249, 115, 22, 0.16), transparent 34%),
-    radial-gradient(circle at 18% 120%, rgba(156, 113, 85, 0.16), transparent 38%),
-    linear-gradient(135deg, #17110e 0%, #100c0a 56%, #0b0807 100%);
-  box-shadow: 0 24px 60px rgba(31, 20, 14, 0.16);
+    radial-gradient(circle at 88% 12%, rgba(249, 115, 22, 0.16), transparent 30%),
+    radial-gradient(circle at 16% 112%, rgba(196, 154, 122, 0.14), transparent 34%),
+    linear-gradient(135deg, rgba(255, 252, 248, 0.98) 0%, rgba(249, 243, 236, 0.98) 52%, rgba(244, 235, 226, 0.96) 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.72) inset,
+    0 22px 52px rgba(65, 43, 31, 0.10);
+  color: #211a16;
+}
+
+.dark .dashboard-hero {
+  border-color: rgba(255, 255, 255, 0.09);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(249, 115, 22, 0.18), transparent 30%),
+    radial-gradient(circle at 16% 112%, rgba(178, 123, 86, 0.14), transparent 34%),
+    linear-gradient(135deg, rgba(39, 29, 24, 0.98) 0%, rgba(28, 20, 17, 0.98) 54%, rgba(20, 15, 13, 0.98) 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 60px rgba(0, 0, 0, 0.22);
   color: white;
+}
+
+.dashboard-hero::before {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  right: -58px;
+  top: -76px;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 115, 22, 0.18);
+  box-shadow:
+    0 0 0 34px rgba(249, 115, 22, 0.035),
+    0 0 0 70px rgba(249, 115, 22, 0.018);
+  pointer-events: none;
 }
 
 .dashboard-hero::after {
@@ -97,10 +126,16 @@ select:focus-visible {
   inset: 0;
   pointer-events: none;
   background-image:
+    linear-gradient(rgba(93, 70, 56, 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(93, 70, 56, 0.032) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.72), transparent 70%);
+}
+
+.dark .dashboard-hero::after {
+  background-image:
     linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 34px 34px;
-  mask-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.9), transparent 68%);
 }
 
 .dashboard-hero > * {
@@ -109,15 +144,60 @@ select:focus-visible {
 }
 
 .dashboard-hero .eyebrow {
+  color: #ea580c;
+}
+
+.dark .dashboard-hero .eyebrow {
   color: #fb923c;
 }
 
 .dashboard-hero .dashboard-page-heading {
+  color: #211a16;
+}
+
+.dark .dashboard-hero .dashboard-page-heading {
   color: white;
 }
 
 .dashboard-hero .dashboard-page-copy {
-  color: rgba(255, 255, 255, 0.58);
+  color: #6f6259;
+}
+
+.dark .dashboard-hero .dashboard-page-copy {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.dashboard-hero-tags {
+  @apply mt-6 flex flex-wrap gap-2 text-xs font-medium;
+}
+
+.dashboard-hero-tag {
+  @apply rounded-full px-3 py-1.5 transition duration-200;
+  border: 1px solid rgba(196, 171, 153, 0.72);
+  background: rgba(255, 255, 255, 0.58);
+  color: #6f6259;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-hero-tag:hover {
+  border-color: rgba(249, 115, 22, 0.42);
+  background: rgba(255, 247, 237, 0.86);
+  color: #c2410c;
+  transform: translateY(-1px);
+}
+
+.dark .dashboard-hero-tag {
+  border-color: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.62);
+  box-shadow: none;
+}
+
+.dark .dashboard-hero-tag:hover {
+  border-color: rgba(249, 115, 22, 0.34);
+  background: rgba(249, 115, 22, 0.08);
+  color: #fdba74;
 }
 
 .dashboard-card {
@@ -1691,3 +1771,5 @@ select:focus-visible {
     bottom: 5%;
   }
 }
+
+

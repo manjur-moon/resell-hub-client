@@ -34,10 +34,10 @@ export default function SellerDashboardPage() {
               Track listings, paid sales, revenue and pending orders while keeping the next seller action close at hand.
             </p>
           </div>
-          <div className="mt-6 flex flex-wrap gap-2 text-xs font-medium text-white/55">
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Listing management</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Order fulfillment</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Sales visibility</span>
+          <div className="dashboard-hero-tags">
+            <span className="dashboard-hero-tag">Listing management</span>
+            <span className="dashboard-hero-tag">Order fulfillment</span>
+            <span className="dashboard-hero-tag">Sales visibility</span>
           </div>
         </section>
 

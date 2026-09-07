@@ -26,10 +26,10 @@ export default function BuyerDashboardPage() {
               Keep orders, saved products and completed payments organized in a buyer workspace designed around your next action.
             </p>
           </div>
-          <div className="mt-6 flex flex-wrap gap-2 text-xs font-medium text-white/55">
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Order tracking</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Saved products</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Payment history</span>
+          <div className="dashboard-hero-tags">
+            <span className="dashboard-hero-tag">Order tracking</span>
+            <span className="dashboard-hero-tag">Saved products</span>
+            <span className="dashboard-hero-tag">Payment history</span>
           </div>
         </section>
 
